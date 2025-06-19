@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boston Housing Price Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <div class="container mt-5">
+        <div class="card shadow-lg rounded">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Boston Housing Price Prediction</h2>
+
+                <form action="/predict" method="post">
+                    <div class="row g-3">
+                        {% for feature in ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT'] %}
+                        <div class="col-md-4">
+                            <label for="{{ feature }}" class="form-label">{{ feature }}</label>
+                            <input type="text" name="{{ feature }}" class="form-control" id="{{ feature }}" required>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">Predict Price</button>
+                    </div>
+                </form>
+
+                {% if prediction_text %}
+                <div class="alert alert-success text-center mt-4">
+                    <h4>{{ prediction_text }}</h4>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
